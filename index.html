@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function byId(id) {
+            return document.getElementById(id).value;
+        }
+        function convertiranum(arreglo, lim)
+        {
+            //Leer datos de vo 
+            var arrs = arreglo.split(lim);
+            arrn =[];
+            arrs.forEach((elem) => {
+                arrn.push(Number(elem))
+            });
+            return arrn;
+        }
+        function traslacion()
+        {
+            //var aos = document.getElementById("vo").value.split(",");
+            arregloOriginal = convertiranum(byId("vo"), ",")
+            arregloTraslacion = convertiranum(byId("vt"), ",")
+            document.getElementById("vr").value= suma(arregloOriginal,arregloTraslacion)
+
+        }
+        function escalar()
+        {
+            //var aos = document.getElementById("vo").value.split(",");
+            arregloOriginal = convertiranum(byId("voe"), ",")
+            var esc = byId("e")
+            document.getElementById("vre").value= multiplicar(arregloOriginal,esc)
+
+        }
+        function suma(array1, array2)
+        {
+            return array1.map(function(num, idx){
+                return num + array2[idx]
+            });
+        }
+
+        function multiplicar(array1, escala)
+        {
+            return array1.map(function(num, idx){
+                return num * escala
+            });
+        }
+
+        function rotar()
+        {
+            arregloOriginal = convertiranum(byId("vor"), ",")
+            //document.getElementById("vrotado").value= arregloOriginal
+            var ang = byId("angulo")
+            var radianes = ang * (Math.PI / 180);
+            var arr2 = new Array(3);
+            arr2[0] = (arregloOriginal[0] * Math.cos(radianes) - arregloOriginal[1] * Math.sin(radianes)).toFixed(1);
+            arr2[1] = (arregloOriginal[0] * Math.sin(radianes) + arregloOriginal[1] * Math.cos(radianes)).toFixed(1);
+            arr2[2] = arregloOriginal[2];
+
+    // Asignar el valor rotado al elemento con ID "vrotado"
+            document.getElementById("vrotado").value =arr2.join(", ");
+        }
+
+       
+    </script>
+</head>
+<body>
+    <h1>
+        <center> TAREA 1 - TRASLACION,ESCALA Y ROTACION DE VECTORES</center>
+    </h1>
+    <h1> Traslación </h1>
+    <p>Vector Original 
+        <input id="vo" size="10">  <!--Vector original-->
+    </p>
+    <p>Vector Traslacion 
+        <input id="vt" size="10">  <!--Vector traslacion-->     
+    </p>
+    <p>Vector Trasladado
+        <input id="vr" size="10"> <!--Vector trasladado-->
+    </p>
+    <button id="btn_tr" onclick="traslacion()">Realizar traslacion</button>
+    <h1> Escalar </h1>
+    <p>Vector Original 
+        <input id="voe" size="10">  <!--Vector original-->
+    </p>
+    <p>Escala Del 1 al 100  
+        <input id="e" size="10">  <!--Vector original-->
+    </p>
+    <p>Vector Escalado
+        <input id="vre" size="10"> <!--Vector trasladado-->
+    </p>
+    <button id="btn_esc" onclick="escalar()">Realizar escalado</button>
+    <h1> Rotación </h1>
+    <p>Vector Original 
+        <input id="vor" size="10">  <!--Vector original-->
+    </p>
+    <p>Angulo de rotación   
+        <input id="angulo" size="10">  <!--Vector original-->
+    </p>
+    <p>Vector Rotado
+        <input id="vrotado" size="10"> <!--Vector trasladado-->
+    </p>
+    <button id="btn_rot" onclick="rotar()">Realizar rotación</button>
+    
+
+</body>
+</html>
